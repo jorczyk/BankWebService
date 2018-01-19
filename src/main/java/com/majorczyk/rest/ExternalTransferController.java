@@ -25,7 +25,7 @@ public class ExternalTransferController {
 
     @RequestMapping(method = RequestMethod.POST,value = "/accounts/{accountNumber}/history")
     public ResponseEntity externalTransfer(@PathVariable String accountNumber,@RequestBody RequestMessage payload){
-        Account destinationAccount = accountService.getAccountByNumber(accountNumber);
+        Account destinationAccount = accountService.findByAccountNumber(accountNumber);
 
         if (destinationAccount == null) {
             ResponseMessage response = new ResponseMessage("nr_konta","Account doesn't exist");
@@ -39,15 +39,16 @@ public class ExternalTransferController {
 
         destinationAccount.setBalance(destinationAccount.getBalance() + payload.getAmount());
         accountService.save(destinationAccount);
-        Transfer transfer = new Transfer(null,
-                TransferType.EXTERNAL_TANSFER,
-                payload.getSource(),
-                destinationAccount.getAccountNumber(),
-                payload.getAmount(),
-                payload.getTitle(),
-                payload.getName());
+        Transfer transfer = new Transfer();
+        transfer.setAmmount(payload.getAmount());
+        transfer.setDestinationAccountNumber(destinationAccount.getAccountNumber());
+//        transfer.setName(payload.getName());
+        transfer.setSourceAccount(payload.getSource());
+        transfer.setTitle(payload.getTitle());
+        transfer.setTransferType(TransferType.EXTERNAL_TANSFER);
         transferService.save(transfer);
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
+
 }
