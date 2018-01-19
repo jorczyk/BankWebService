@@ -1,0 +1,8 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+	<Login xmlns="com/majorczyk/soap/account">
+            <login>"huhu"</login>
+            <password>"dsa"</password>
+    </Login>
+    </Body>
+</Envelope>
