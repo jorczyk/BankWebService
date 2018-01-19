@@ -61,6 +61,8 @@ public class AccountEndpoint {
         LoginResponse response = new LoginResponse();
         String userLogin = request.getLogin();
         String userPassword = request.getPassword();
+        User user = userService.findByLogin(userLogin);
+        response.setLogin(userLogin);
 //        response.setUserId(userService.findByLoginAndPassword(userLogin,userPassword).getId());
         return response;
     }

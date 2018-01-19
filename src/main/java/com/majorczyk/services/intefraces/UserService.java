@@ -8,6 +8,6 @@ import com.majorczyk.model.User;
 public interface UserService {
     void save(User user);
     User findByLoginAndPassword(String login,String password);
-    User findByLogin(String token);
+    User findByLogin(String login);
 
 }

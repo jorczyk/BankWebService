@@ -15,7 +15,8 @@
     <xs:element name="LoginResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="userId" type="xs:int"/>
+                <!--<xs:element name="userId" type="xs:int"/>-->
+                <xs:element name="login" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

@@ -5,6 +5,6 @@ package com.majorczyk.model;
  */
 public class Bank {
 
-    private static final String branchNumber = "00117325";
+    private static final String branchNumber = "00112245";
     private static final String POLAND_CODE = "2521";
 }

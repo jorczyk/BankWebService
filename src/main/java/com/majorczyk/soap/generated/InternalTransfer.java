@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="accountFrom" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="accountTo" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
