@@ -11,7 +11,7 @@ package com.majorczyk.rest;
         import org.springframework.web.bind.annotation.*;
 
 /**
- * Created by Piotr on 2018-01-11.
+ * REST inter-bank transfers controller
  */
 
 @RestController
@@ -23,8 +23,17 @@ public class ExternalTransferController {
     @Autowired
     TransferService transferService;
 
+    /**
+     * Used for inte-bank transfers
+     * @param accountNumber - destination account number
+     * @param message - body of request message
+     * @return response status and body
+     */
+
     @RequestMapping(method = RequestMethod.POST,value = "/accounts/{accountNumber}/history")
-    public ResponseEntity externalTransfer(@PathVariable String accountNumber,@RequestBody RequestMessage payload){
+    public ResponseEntity externalTransfer(@PathVariable String accountNumber,@RequestBody RequestMessage message){
+        //TODO
+
         Account destinationAccount = accountService.findByAccountNumber(accountNumber);
 
         if (destinationAccount == null) {
@@ -32,19 +41,19 @@ public class ExternalTransferController {
             return new ResponseEntity<ResponseMessage>(response, HttpStatus.BAD_REQUEST);
         }
 
-        if (payload.getAmount() <= 0) {
+        if (message.getAmount() <= 0) {
             ResponseMessage response = new ResponseMessage("ammount","Amount must be greater than 0");
             return new ResponseEntity<ResponseMessage>(response, HttpStatus.BAD_REQUEST);
         }
 
-        destinationAccount.setBalance(destinationAccount.getBalance() + payload.getAmount());
+        destinationAccount.setBalance(destinationAccount.getBalance() + message.getAmount());
         accountService.save(destinationAccount);
         Transfer transfer = new Transfer();
-        transfer.setAmmount(payload.getAmount());
-        transfer.setDestinationAccountNumber(destinationAccount.getAccountNumber());
+        transfer.setAmmount(message.getAmount());
+        transfer.setDestinationAccountNo(destinationAccount.getAccountNumber());
 //        transfer.setName(payload.getName());
-        transfer.setSourceAccount(payload.getSource());
-        transfer.setTitle(payload.getTitle());
+        transfer.setSourceAccountNo(message.getSource());
+        transfer.setTitle(message.getTitle());
         transfer.setTransferType(TransferType.EXTERNAL_TANSFER);
         transferService.save(transfer);
         return ResponseEntity.status(HttpStatus.OK).build();

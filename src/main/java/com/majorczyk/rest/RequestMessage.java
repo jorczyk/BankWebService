@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class RequestMessage {
 
     String source;
-    Integer amount;
+    long amount;
     String title;
     String name;
 }

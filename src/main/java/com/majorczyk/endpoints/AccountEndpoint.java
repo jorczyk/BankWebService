@@ -43,13 +43,13 @@ public class AccountEndpoint {
     @ResponsePayload
     public GetAccountHistoryResponse getAccountHistory(@RequestPayload GetAccountHistoryRequest request){
         GetAccountHistoryResponse response = new GetAccountHistoryResponse();
-        User user = userService.findByLogin(request.getToken());
-        List<Transfer> transfers = accountService.getAccountHistory(request.getAccountId());
-
-//        Bank.checkControlSum(accountHistory.getAccountNumber());
-        for(Transfer transfer : transfers){
-            response.getAccountHistory().add(transfer.convertToResponse());
-        }
+//        User user = userService.findByLogin(request.getToken());
+//        List<Transfer> transfers = accountService.getAccountHistory(request.getAccountId());
+//
+////        Bank.checkControlSum(accountHistory.getAccountNumber());
+//        for(Transfer transfer : transfers){
+//            response.getAccountHistory().add(transfer.convertToResponse());
+//        }
 
         return response;
     }
@@ -59,44 +59,11 @@ public class AccountEndpoint {
     @ResponsePayload
     public LoginResponse login(@RequestPayload Login request){
         LoginResponse response = new LoginResponse();
-        String userLogin = request.getLogin();
-        String userPassword = request.getPassword();
-        User user = userService.findByLogin(userLogin);
-        response.setLogin(userLogin);
-//        response.setUserId(userService.findByLoginAndPassword(userLogin,userPassword).getId());
-        return response;
-    }
-
-//    @PayloadRoot(namespace = NAMESPACE,
-//            localPart = "CreateBankAccount")
-//    @ResponsePayload
-//    public CreateBankAccountResponse createBankAccount(@RequestPayload CreateBankAccount request){
-//        CreateBankAccountResponse response = new CreateBankAccountResponse();
-////        Integer userId = request.getUserId();
-////        Account account = new Account();
-////        account.setBalance(0);
-////        account.setAccountNumber("123");
-////        response.setAccountId(account.getAccountNumber());
-//
-//        //dzialania na response
-//        return response;
-//    }
-
-    //    @PayloadRoot(namespace = NAMESPACE,
-//            localPart = "CreateUserAccount")
-//    public void createUserAccount(@RequestPayload CreateUserAccount request){
 //        String userLogin = request.getLogin();
 //        String userPassword = request.getPassword();
-//        User user = new User();
-//        user.setLogin(userLogin);
-//        user.setPassword(userPassword);
-//        userRepository.insert(user);
-//        //dzialania na response
-//
-//        //dzialania na response
-//    }
-
-
-
-
+//        User user = userService.findByLogin(userLogin);
+//        response.setLogin(userLogin);
+////        response.setUserId(userService.findByLoginAndPassword(userLogin,userPassword).getId());
+        return response;
+    }
 }

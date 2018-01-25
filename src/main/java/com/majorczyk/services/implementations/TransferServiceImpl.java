@@ -5,7 +5,6 @@ import com.majorczyk.database.TransferRepository;
 import com.majorczyk.model.Account;
 import com.majorczyk.model.Transfer;
 import com.majorczyk.model.TransferType;
-import com.majorczyk.model.User;
 import com.majorczyk.services.intefraces.TransferService;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -65,8 +64,8 @@ public class TransferServiceImpl implements TransferService {
             accountRepository.save(accountTo);
             Transfer transfer = new Transfer();
             transfer.setTransferType(TransferType.INTERNAL_TRANSFER);
-            transfer.setSourceAccount(accountFrom.getAccountNumber());
-            transfer.setDestinationAccountNumber(accountTo.getAccountNumber());
+            transfer.setSourceAccountNo(accountFrom.getAccountNumber());
+            transfer.setDestinationAccountNo(accountTo.getAccountNumber());
             transfer.setAmmount(amount);
             transfer.setBalance(accountFrom.getBalance());
             transferRepository.save(transfer);
@@ -85,7 +84,7 @@ public class TransferServiceImpl implements TransferService {
             accountRepository.save(accountTo);
             Transfer transfer = new Transfer();
             transfer.setTransferType(TransferType.PAYMENT);
-            transfer.setDestinationAccountNumber(accountTo.getAccountNumber());
+            transfer.setDestinationAccountNo(accountTo.getAccountNumber());
             transfer.setTitle("Payment");
             transfer.setAmmount(amount);
             transfer.setBalance(accountTo.getBalance());
@@ -104,7 +103,7 @@ public class TransferServiceImpl implements TransferService {
             accountRepository.save(accountFrom);
             Transfer transfer = new Transfer();
             transfer.setTransferType(TransferType.WITHDRAWAL);
-            transfer.setSourceAccount(accountFrom.getAccountNumber());
+            transfer.setSourceAccountNo(accountFrom.getAccountNumber());
             transfer.setTitle("Withdrawal");
             transfer.setAmmount(amount);
             transfer.setBalance(accountFrom.getBalance());

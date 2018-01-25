@@ -10,29 +10,32 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * Created by Piotr on 2018-01-19.
+ * Bank customer model
  */
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
 
-    @Setter
-    @Getter
+    /**
+     * Database unique id
+     */
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private ObjectId id;
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)//?
+    private String id;
 
-//    @Setter
-//    @Getter
-//    private List<String> accounts;
-
+    /**
+     * User login
+     */
     @Setter
     @Getter
     @Column(unique = true)
     private String login;
 
+    /**
+     * User password
+     */
     @Setter
     @Getter
     @Column

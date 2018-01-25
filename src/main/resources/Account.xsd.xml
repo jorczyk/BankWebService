@@ -1,4 +1,0 @@
-<acc:Login xmlns:acc="com/majorczyk/soap/account">
-  <acc:login>string</acc:login>
-  <acc:password>string</acc:password>
-</acc:Login>

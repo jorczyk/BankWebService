@@ -7,8 +7,9 @@ import org.bson.types.ObjectId;
 import javax.persistence.*;
 
 /**
- * Created by Piotr on 2018-01-11.
+ * Bank account model
  */
+
 @Entity
 @Table(name = "accounts")
 public class Account {
@@ -16,8 +17,8 @@ public class Account {
     @Setter
     @Getter
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private ObjectId id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
 
     @Setter
     @Getter
@@ -32,5 +33,11 @@ public class Account {
     @Setter
     @Getter
     @Column(unique = true)
-    private int credentials;
+    private String user;
+
+    public Account(String accountNumber, Integer balance, String user) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        this.user = user;
+    }
 }
