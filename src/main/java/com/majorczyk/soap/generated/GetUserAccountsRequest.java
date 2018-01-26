@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="operationPayload" type="{com/majorczyk/soap/account}OperationPayload"/>
+ *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "operationPayload"
+    "token"
 })
-@XmlRootElement(name = "Payment", namespace = "com/majorczyk/soap/account")
-public class Payment {
+@XmlRootElement(name = "GetUserAccountsRequest", namespace = "com/majorczyk/soap/account")
+public class GetUserAccountsRequest {
 
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
-    protected OperationPayload operationPayload;
+    protected String token;
 
     /**
-     * Gets the value of the operationPayload property.
+     * Gets the value of the token property.
      * 
      * @return
      *     possible object is
-     *     {@link OperationPayload }
+     *     {@link String }
      *     
      */
-    public OperationPayload getOperationPayload() {
-        return operationPayload;
+    public String getToken() {
+        return token;
     }
 
     /**
-     * Sets the value of the operationPayload property.
+     * Sets the value of the token property.
      * 
      * @param value
      *     allowed object is
-     *     {@link OperationPayload }
+     *     {@link String }
      *     
      */
-    public void setOperationPayload(OperationPayload value) {
-        this.operationPayload = value;
+    public void setToken(String value) {
+        this.token = value;
     }
 
 }

@@ -18,9 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="accountFrom" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="operationPayload" type="{com/majorczyk/soap/account}OperationPayload"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,82 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "accountFrom",
-    "amount",
-    "token"
+    "operationPayload"
 })
 @XmlRootElement(name = "Withdrawal", namespace = "com/majorczyk/soap/account")
 public class Withdrawal {
 
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
-    protected String accountFrom;
-    @XmlElement(namespace = "com/majorczyk/soap/account")
-    protected int amount;
-    @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
-    protected String token;
+    protected OperationPayload operationPayload;
 
     /**
-     * Gets the value of the accountFrom property.
+     * Gets the value of the operationPayload property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link OperationPayload }
      *     
      */
-    public String getAccountFrom() {
-        return accountFrom;
+    public OperationPayload getOperationPayload() {
+        return operationPayload;
     }
 
     /**
-     * Sets the value of the accountFrom property.
+     * Sets the value of the operationPayload property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link OperationPayload }
      *     
      */
-    public void setAccountFrom(String value) {
-        this.accountFrom = value;
-    }
-
-    /**
-     * Gets the value of the amount property.
-     * 
-     */
-    public int getAmount() {
-        return amount;
-    }
-
-    /**
-     * Sets the value of the amount property.
-     * 
-     */
-    public void setAmount(int value) {
-        this.amount = value;
-    }
-
-    /**
-     * Gets the value of the token property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getToken() {
-        return token;
-    }
-
-    /**
-     * Sets the value of the token property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setToken(String value) {
-        this.token = value;
+    public void setOperationPayload(OperationPayload value) {
+        this.operationPayload = value;
     }
 
 }

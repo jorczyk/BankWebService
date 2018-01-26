@@ -30,11 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Payment }
+     * Create an instance of {@link Deposit }
      * 
      */
-    public Payment createPayment() {
-        return new Payment();
+    public Deposit createDeposit() {
+        return new Deposit();
+    }
+
+    /**
+     * Create an instance of {@link OperationPayload }
+     * 
+     */
+    public OperationPayload createOperationPayload() {
+        return new OperationPayload();
     }
 
     /**
@@ -46,19 +54,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TokenResponse }
+     * Create an instance of {@link GetUserAccountsRequest }
      * 
      */
-    public TokenResponse createTokenResponse() {
-        return new TokenResponse();
-    }
-
-    /**
-     * Create an instance of {@link TransferResponse }
-     * 
-     */
-    public TransferResponse createTransferResponse() {
-        return new TransferResponse();
+    public GetUserAccountsRequest createGetUserAccountsRequest() {
+        return new GetUserAccountsRequest();
     }
 
     /**
@@ -67,14 +67,6 @@ public class ObjectFactory {
      */
     public Withdrawal createWithdrawal() {
         return new Withdrawal();
-    }
-
-    /**
-     * Create an instance of {@link ExternalTransfer }
-     * 
-     */
-    public ExternalTransfer createExternalTransfer() {
-        return new ExternalTransfer();
     }
 
     /**
@@ -94,6 +86,78 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link WithdrawalResponse }
+     * 
+     */
+    public WithdrawalResponse createWithdrawalResponse() {
+        return new WithdrawalResponse();
+    }
+
+    /**
+     * Create an instance of {@link OperationResponse }
+     * 
+     */
+    public OperationResponse createOperationResponse() {
+        return new OperationResponse();
+    }
+
+    /**
+     * Create an instance of {@link DepositResponse }
+     * 
+     */
+    public DepositResponse createDepositResponse() {
+        return new DepositResponse();
+    }
+
+    /**
+     * Create an instance of {@link PaymentResponse }
+     * 
+     */
+    public PaymentResponse createPaymentResponse() {
+        return new PaymentResponse();
+    }
+
+    /**
+     * Create an instance of {@link Payment }
+     * 
+     */
+    public Payment createPayment() {
+        return new Payment();
+    }
+
+    /**
+     * Create an instance of {@link TransferResponse }
+     * 
+     */
+    public TransferResponse createTransferResponse() {
+        return new TransferResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetUserAccountsResponse }
+     * 
+     */
+    public GetUserAccountsResponse createGetUserAccountsResponse() {
+        return new GetUserAccountsResponse();
+    }
+
+    /**
+     * Create an instance of {@link Account }
+     * 
+     */
+    public Account createAccount() {
+        return new Account();
+    }
+
+    /**
+     * Create an instance of {@link Transfer }
+     * 
+     */
+    public Transfer createTransfer() {
+        return new Transfer();
+    }
+
+    /**
      * Create an instance of {@link GetAccountHistoryResponse }
      * 
      */
@@ -107,22 +171,6 @@ public class ObjectFactory {
      */
     public AccountHistoryEntity createAccountHistoryEntity() {
         return new AccountHistoryEntity();
-    }
-
-    /**
-     * Create an instance of {@link InternalTransfer }
-     * 
-     */
-    public InternalTransfer createInternalTransfer() {
-        return new InternalTransfer();
-    }
-
-    /**
-     * Create an instance of {@link HistoryTransferSource }
-     * 
-     */
-    public HistoryTransferSource createHistoryTransferSource() {
-        return new HistoryTransferSource();
     }
 
 }

@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="accountId" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="accountNo" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "token",
-    "accountId"
+    "accountNo"
 })
 @XmlRootElement(name = "GetAccountHistoryRequest", namespace = "com/majorczyk/soap/account")
 public class GetAccountHistoryRequest {
@@ -39,7 +39,7 @@ public class GetAccountHistoryRequest {
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
     protected String token;
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
-    protected String accountId;
+    protected String accountNo;
 
     /**
      * Gets the value of the token property.
@@ -66,27 +66,27 @@ public class GetAccountHistoryRequest {
     }
 
     /**
-     * Gets the value of the accountId property.
+     * Gets the value of the accountNo property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getAccountId() {
-        return accountId;
+    public String getAccountNo() {
+        return accountNo;
     }
 
     /**
-     * Sets the value of the accountId property.
+     * Sets the value of the accountNo property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setAccountId(String value) {
-        this.accountId = value;
+    public void setAccountNo(String value) {
+        this.accountNo = value;
     }
 
 }

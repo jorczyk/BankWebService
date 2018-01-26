@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="login" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "login"
+    "token"
 })
 @XmlRootElement(name = "LoginResponse", namespace = "com/majorczyk/soap/account")
 public class LoginResponse {
 
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
-    protected String login;
+    protected String token;
 
     /**
-     * Gets the value of the login property.
+     * Gets the value of the token property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getLogin() {
-        return login;
+    public String getToken() {
+        return token;
     }
 
     /**
-     * Sets the value of the login property.
+     * Sets the value of the token property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setLogin(String value) {
-        this.login = value;
+    public void setToken(String value) {
+        this.token = value;
     }
 
 }

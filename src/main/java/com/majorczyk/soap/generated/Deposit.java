@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "operationPayload"
 })
-@XmlRootElement(name = "Payment", namespace = "com/majorczyk/soap/account")
-public class Payment {
+@XmlRootElement(name = "Deposit", namespace = "com/majorczyk/soap/account")
+public class Deposit {
 
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
     protected OperationPayload operationPayload;

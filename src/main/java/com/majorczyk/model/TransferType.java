@@ -12,7 +12,8 @@ public enum TransferType {
     EXTERNAL_TANSFER("ET","External transfer"),
     INTERNAL_TRANSFER("IT","Internal transfer"),
     WITHDRAWAL("W","Cash withdrawal from account"),
-    PAYMENT("P","Payemnt made to account");
+    PAYMENT("P","Payemnt made to account"),
+    DEPOSIT("D","Deposit made to account");
 
     @Setter
     @Getter

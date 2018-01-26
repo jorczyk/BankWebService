@@ -1,6 +1,7 @@
 package com.majorczyk.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
  */
 
 @Entity
+@NoArgsConstructor
 @Table(name = "accounts")
 public class Account {
 
@@ -28,7 +30,7 @@ public class Account {
     @Setter
     @Getter
     @Column
-    private Integer balance;
+    private long balance;
 
     @Setter
     @Getter

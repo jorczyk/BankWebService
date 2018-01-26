@@ -16,81 +16,25 @@
         <xs:complexType>
             <xs:sequence>
                 <!--<xs:element name="userId" type="xs:int"/>-->
-                <xs:element name="login" type="xs:string"/>
+                <xs:element name="token" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <!--<xs:element name="CreateUserAccount">-->
-        <!--<xs:complexType>-->
-            <!--<xs:sequence>-->
-                <!--<xs:element name="login" type="xs:string"/>-->
-                <!--<xs:element name="password" type="xs:string"/>-->
-            <!--</xs:sequence>-->
-        <!--</xs:complexType>-->
-    <!--</xs:element>-->
+    <xs:element name="GetUserAccountsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-    <!--<xs:element name="CreateBankAccount">-->
-        <!--<xs:complexType>-->
-            <!--<xs:sequence>-->
-                <!--<xs:element name="userId" type="xs:int"/>-->
-            <!--</xs:sequence>-->
-        <!--</xs:complexType>-->
-    <!--</xs:element>-->
-    <!--<xs:element name="CreateBankAccountResponse">-->
-        <!--<xs:complexType>-->
-            <!--<xs:sequence>-->
-                <!--<xs:element name="accountId" type="xs:string"/>-->
-            <!--</xs:sequence>-->
-        <!--</xs:complexType>-->
-    <!--</xs:element>-->
-
-    <xs:element name="ExternalTransfer">
+    <xs:element name="GetUserAccountsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="accountFrom" type="xs:string"/>
-                <xs:element name="accountTo" type="xs:string"/>
-                <xs:element name="amount" type="xs:int"/>
-                <xs:element name="title" type="xs:string"/>
-                <xs:element name="name" type="xs:string"/>
-                <xs:element name="token" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="TransferResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="balance" type="xs:int"/>
-                <xs:element name="status" type="tn:TransferStatus"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="InternalTransfer">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="accountFrom" type="xs:string"/>
-                <xs:element name="accountTo" type="xs:string"/>
-                <xs:element name="amount" type="xs:int"/>
-                <xs:element name="title" type="xs:string"/>
-                <xs:element name="token" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Payment">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="accountTo" type="xs:string"/>
-                <xs:element name="amount" type="xs:int"/>
-                <xs:element name="token" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="Withdrawal">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="accountFrom" type="xs:string"/>
-                <xs:element name="amount" type="xs:int"/>
-                <xs:element name="token" type="xs:string"/>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="account" type="tn:Account"/>
+                </xs:sequence>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -99,7 +43,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="token" type="xs:string"/>
-                <xs:element name="accountId" type="xs:string"/>
+                <xs:element name="accountNo" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -113,13 +57,85 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="TokenResponse">
+    <xs:element name="Deposit">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="token" type="xs:string"/>
+                <xs:element name="operationPayload" type="tn:OperationPayload"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="DepositResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tn:OperationResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Payment">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="operationPayload" type="tn:OperationPayload"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PaymentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tn:OperationResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Withdrawal">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="operationPayload" type="tn:OperationPayload"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="WithdrawalResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tn:OperationResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Transfer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="accountFrom" type="xs:string"/>
+                <xs:element name="accountTo" type="xs:string"/>
+                <xs:element name="amount" type="xs:int"/>
+                <xs:element name="title" type="xs:string"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="interbank" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="TransferResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="response" type="tn:OperationResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+
+    <!--<xs:element name="TokenResponse">-->
+        <!--<xs:complexType>-->
+            <!--<xs:sequence>-->
+                <!--<xs:element name="token" type="xs:string"/>-->
+            <!--</xs:sequence>-->
+        <!--</xs:complexType>-->
+    <!--</xs:element>-->
 
     <!--<xs:complexType name="TransferForHistory">-->
         <!--<xs:sequence>-->
@@ -130,12 +146,12 @@
         <!--</xs:sequence>-->
     <!--</xs:complexType>-->
 
-    <xs:complexType name="HistoryTransferSource">
-        <xs:choice>
-            <xs:element name="InnerTransferEnum" type="tn:InnerTransferEnum"/>
-            <xs:element name="accountFrom" type="xs:string"/>
-        </xs:choice>
-    </xs:complexType>
+    <!--<xs:complexType name="HistoryTransferSource">-->
+        <!--<xs:choice>-->
+            <!--<xs:element name="InnerTransferEnum" type="tn:InnerTransferEnum"/>-->
+            <!--<xs:element name="accountFrom" type="xs:string"/>-->
+        <!--</xs:choice>-->
+    <!--</xs:complexType>-->
 
     <xs:simpleType name="InnerTransferEnum">
         <xs:restriction base="xs:string">
@@ -147,11 +163,10 @@
 
     <xs:complexType name="AccountHistoryEntity">
         <xs:sequence>
-            <xs:element name="source" type="tn:HistoryTransferSource"/>
-            <xs:element name="amount" type="xs:int"/>
+            <xs:element name="source" type="xs:string"/>
+            <xs:element name="amount" type="xs:long"/>
             <xs:element name="title" type="xs:string"/>
-            <xs:element name="destination" type="xs:string"/>
-            <xs:element name="balanceAfter" type="xs:int"/>
+            <xs:element name="balanceAfter" type="xs:long"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -161,5 +176,30 @@
             <xs:enumeration value="ERROR" />
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:complexType name="Account">
+        <xs:sequence>
+            <xs:element name="number" type="xs:string"/>
+            <xs:element name="user" type="xs:string"/>
+            <xs:element name="balance" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OperationPayload">
+        <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="accountNo" type="xs:string"/>
+            <xs:element name="amount" type="xs:long"/>
+            <xs:element name="title" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OperationResponse">
+        <xs:sequence>
+            <xs:element name="status" type="xs:int"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
 
 </xs:schema>

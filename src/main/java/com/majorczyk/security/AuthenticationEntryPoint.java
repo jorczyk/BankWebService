@@ -11,11 +11,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by Piotr on 2018-01-13.
+ * Configuration of HTTP Basic Authentication
  */
 @Component
 public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 
+    /**
+     * Returns 401 UNAUTHORIZED when authentication fails
+     * @param request request that was made
+     * @param response response to request
+     * @param authEx exception thrown when authentication fails
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authEx)
             throws IOException, ServletException {
@@ -25,6 +33,10 @@ public class AuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
         writer.println("HTTP Status 401 - " + authEx.getMessage());
     }
 
+    /**
+     * Sets the realm of authentication
+     * @throws Exception
+     */
     @Override
     public void afterPropertiesSet() throws Exception {
         setRealmName("test_realm");

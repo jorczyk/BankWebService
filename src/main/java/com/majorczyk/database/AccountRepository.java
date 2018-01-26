@@ -7,11 +7,22 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 /**
- * Created by Piotr on 2018-01-15.
+ * Interface extending spring MongoRepository to access accounts' repository
  */
-public interface AccountRepository extends MongoRepository<Account, ObjectId> {
+public interface AccountRepository extends MongoRepository<Account, String> {
 
-    Account findByAccountNumber(String name);
-    Account findAccountByAccountNumberAndCredentials(String accountNumber, int credentials);
+    /**
+     * Finds bank account by it's number
+     * @param number - account number
+     * @return Bank account object
+     */
+    Account findByAccountNumber(String number);
+
+    /**
+     * Finds all user's bank accounts
+     * @param user - user id
+     * @return list of bank accounts owned by user
+     */
+    List<Account> findByUser(String user);
 
 }

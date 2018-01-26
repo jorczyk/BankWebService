@@ -20,7 +20,9 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="accountHistory" type="{com/majorczyk/soap/account}AccountHistoryEntity" maxOccurs="unbounded"/>
+ *         &lt;sequence>
+ *           &lt;element name="account" type="{com/majorczyk/soap/account}Account" maxOccurs="unbounded"/>
+ *         &lt;/sequence>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,41 +33,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "accountHistory"
+    "account"
 })
-@XmlRootElement(name = "GetAccountHistoryResponse", namespace = "com/majorczyk/soap/account")
-public class GetAccountHistoryResponse {
+@XmlRootElement(name = "GetUserAccountsResponse", namespace = "com/majorczyk/soap/account")
+public class GetUserAccountsResponse {
 
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
-    protected List<AccountHistoryEntity> accountHistory;
+    protected List<Account> account;
 
     /**
-     * Gets the value of the accountHistory property.
+     * Gets the value of the account property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the accountHistory property.
+     * This is why there is not a <CODE>set</CODE> method for the account property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAccountHistory().add(newItem);
+     *    getAccount().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link AccountHistoryEntity }
+     * {@link Account }
      * 
      * 
      */
-    public List<AccountHistoryEntity> getAccountHistory() {
-        if (accountHistory == null) {
-            accountHistory = new ArrayList<AccountHistoryEntity>();
+    public List<Account> getAccount() {
+        if (account == null) {
+            account = new ArrayList<Account>();
         }
-        return this.accountHistory;
+        return this.account;
     }
 
 }

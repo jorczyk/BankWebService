@@ -1,15 +1,12 @@
 package com.majorczyk.endpoints;
 
 import com.majorczyk.database.AccountRepository;
-import com.majorczyk.database.UserRepository;
+import com.majorczyk.exceptions.ServiceFault;
+import com.majorczyk.exceptions.ServiceFaultException;
 import com.majorczyk.model.Account;
-import com.majorczyk.model.Transfer;
-import com.majorczyk.model.User;
-import com.majorczyk.services.implementations.AccountServiceImpl;
-import com.majorczyk.services.intefraces.AccountService;
-import com.majorczyk.services.intefraces.TransferService;
-import com.majorczyk.services.intefraces.UserService;
+import com.majorczyk.security.TokenGenerator;
 import com.majorczyk.soap.generated.*;
+import com.majorczyk.utils.Wrapper;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -17,11 +14,10 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Piotr on 2018-01-19.
+ * API endpoint for bank accounts
  */
 @Endpoint
 @NoArgsConstructor
@@ -30,40 +26,34 @@ public class AccountEndpoint {
     private final String NAMESPACE = "com/majorczyk/soap/account";
 
     @Autowired
-    AccountService accountService;
-
+    TokenGenerator tokenGenerator ;
     @Autowired
-    TransferService transferService;
+    AccountRepository accountRepository;
 
-    @Autowired
-    UserService userService;
-
+    /**
+     * Gets user's accounts
+     * @param request - request object
+     * @return response with list of user's accounts
+     */
     @PayloadRoot(namespace = NAMESPACE,
-            localPart = "GetAccountHistoryRequest")
+            localPart = "GetUserAccountsRequest")
     @ResponsePayload
-    public GetAccountHistoryResponse getAccountHistory(@RequestPayload GetAccountHistoryRequest request){
-        GetAccountHistoryResponse response = new GetAccountHistoryResponse();
-//        User user = userService.findByLogin(request.getToken());
-//        List<Transfer> transfers = accountService.getAccountHistory(request.getAccountId());
-//
-////        Bank.checkControlSum(accountHistory.getAccountNumber());
-//        for(Transfer transfer : transfers){
-//            response.getAccountHistory().add(transfer.convertToResponse());
-//        }
-
+    public GetUserAccountsResponse getUserAccountsRequest(@RequestPayload GetUserAccountsRequest request){
+        GetUserAccountsResponse response = new GetUserAccountsResponse();
+        if (!tokenGenerator.validateToken(request.getToken())) {
+            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
+        }
+        try {
+            String username = tokenGenerator.decrypt(request.getToken());
+            List<Account> accounts = accountRepository.findByUser(username);
+            for (Account account : accounts) {
+                response.getAccount().add(Wrapper.wrapAccount(account));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return response;
     }
 
-    @PayloadRoot(namespace = NAMESPACE,
-            localPart = "Login")
-    @ResponsePayload
-    public LoginResponse login(@RequestPayload Login request){
-        LoginResponse response = new LoginResponse();
-//        String userLogin = request.getLogin();
-//        String userPassword = request.getPassword();
-//        User user = userService.findByLogin(userLogin);
-//        response.setLogin(userLogin);
-////        response.setUserId(userService.findByLoginAndPassword(userLogin,userPassword).getId());
-        return response;
-    }
+
 }

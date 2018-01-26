@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="operationPayload" type="{com/majorczyk/soap/account}OperationPayload"/>
+ *         &lt;element name="response" type="{com/majorczyk/soap/account}OperationResponse"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,36 +29,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "operationPayload"
+    "response"
 })
-@XmlRootElement(name = "Payment", namespace = "com/majorczyk/soap/account")
-public class Payment {
+@XmlRootElement(name = "PaymentResponse", namespace = "com/majorczyk/soap/account")
+public class PaymentResponse {
 
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
-    protected OperationPayload operationPayload;
+    protected OperationResponse response;
 
     /**
-     * Gets the value of the operationPayload property.
+     * Gets the value of the response property.
      * 
      * @return
      *     possible object is
-     *     {@link OperationPayload }
+     *     {@link OperationResponse }
      *     
      */
-    public OperationPayload getOperationPayload() {
-        return operationPayload;
+    public OperationResponse getResponse() {
+        return response;
     }
 
     /**
-     * Sets the value of the operationPayload property.
+     * Sets the value of the response property.
      * 
      * @param value
      *     allowed object is
-     *     {@link OperationPayload }
+     *     {@link OperationResponse }
      *     
      */
-    public void setOperationPayload(OperationPayload value) {
-        this.operationPayload = value;
+    public void setResponse(OperationResponse value) {
+        this.response = value;
     }
 
 }

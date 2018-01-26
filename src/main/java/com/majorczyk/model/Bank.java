@@ -1,6 +1,8 @@
 package com.majorczyk.model;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 /**
@@ -25,6 +27,8 @@ public class Bank {
     /**
      * Bank URL address
      */
+    @Getter
+    @Setter
     public String url;
 
     public Bank(String bankId, String url) {

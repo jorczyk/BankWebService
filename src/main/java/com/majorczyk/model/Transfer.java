@@ -1,7 +1,5 @@
 package com.majorczyk.model;
 
-import com.majorczyk.soap.generated.AccountHistoryEntity;
-import com.majorczyk.soap.generated.HistoryTransferSource;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,13 +22,13 @@ public class Transfer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;//?
 
-    /**
-     * Transfer type
-     */
-    @Setter
-    @Getter
-    @Column
-    private TransferType transferType;//?
+//    /**
+//     * Transfer type
+//     */
+//    @Setter
+//    @Getter
+//    @Column
+//    private TransferType transferType;//?
 
     /**
      * Source account number
@@ -40,13 +38,13 @@ public class Transfer {
     @Column
     private String sourceAccountNo;
 
-    /**
-     * Destinations account number
-     */
-    @Setter
-    @Getter
-    @Column
-    private String destinationAccountNo;//?
+//    /**
+//     * Destinations account number
+//     */
+//    @Setter
+//    @Getter
+//    @Column
+//    private String destinationAccountNo;//?
 
     /**
      * Amount transferred
@@ -64,38 +62,39 @@ public class Transfer {
     @Column
     private String title;
 
+    /**
+     * Transfer name
+     */
     @Setter
     @Getter
     @Column
     private String name;
 
-    /**
-     * Balance at source account after transfer
-     */
-    @Setter
-    @Getter
-    @Column
-    private int balance;
-
-    public Transfer(TransferType transferType, String sourceAccountNo, String destinationAccountNo, long amount, String title, String name, int balance) {
-        this.transferType = transferType;
+    public Transfer(String sourceAccountNo, long amount, String title, String name) {
         this.sourceAccountNo = sourceAccountNo;
-        this.destinationAccountNo = destinationAccountNo;
         this.amount = amount;
         this.title = title;
         this.name = name;
-        this.balance = balance;
     }
 
-    public AccountHistoryEntity convertToResponse(){//TODO
-        AccountHistoryEntity responseHistory = new AccountHistoryEntity();
-        HistoryTransferSource source = new HistoryTransferSource();
-        source.setAccountFrom(sourceAccountNo);
-        responseHistory.setBalanceAfter(balance);
-        responseHistory.setSource(source);
-        responseHistory.setDestination(destinationAccountNo);
-//        responseHistory.set(type.getDescription());
-        return responseHistory;
-    }
+    //    /**
+//     * Balance at source account after transfer
+//     */
+//    @Setter
+//    @Getter
+//    @Column
+//    private int balance;
+
+
+//    public AccountHistoryEntity convertToResponse(){//TODO
+//        AccountHistoryEntity responseHistory = new AccountHistoryEntity();
+//        HistoryTransferSource source = new HistoryTransferSource();
+//        source.setAccountFrom(sourceAccountNo);
+//        responseHistory.setBalanceAfter(balance);
+//        responseHistory.setSource(source);
+//        responseHistory.setDestination(destinationAccountNo);
+////        responseHistory.set(type.getDescription());
+//        return responseHistory;
+//    }
 
 }

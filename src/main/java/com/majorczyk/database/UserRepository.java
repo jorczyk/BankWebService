@@ -6,12 +6,15 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * Created by Piotr on 2018-01-15.
+ * Interface extending spring MongoRepository to access users' repository
  */
-public interface UserRepository extends MongoRepository<User, ObjectId> {
+public interface UserRepository extends MongoRepository<User, String> {
 
+    /**
+     * Finds user by login
+     * @param login - user's login
+     * @return User object with given login
+     */
     User findByLogin(String login);
-    User findByLoginAndPassword(String login, String password);
-//    User findByToken(String token);
 
 }

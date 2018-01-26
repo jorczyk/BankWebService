@@ -8,19 +8,19 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for AccountHistoryEntity complex type.
+ * <p>Java class for OperationPayload complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="AccountHistoryEntity">
+ * &lt;complexType name="OperationPayload">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="source" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="accountNo" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="balanceAfter" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -30,45 +30,69 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AccountHistoryEntity", namespace = "com/majorczyk/soap/account", propOrder = {
-    "source",
+@XmlType(name = "OperationPayload", namespace = "com/majorczyk/soap/account", propOrder = {
+    "token",
+    "accountNo",
     "amount",
-    "title",
-    "balanceAfter"
+    "title"
 })
-public class AccountHistoryEntity {
+public class OperationPayload {
 
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
-    protected String source;
+    protected String token;
+    @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
+    protected String accountNo;
     @XmlElement(namespace = "com/majorczyk/soap/account")
     protected long amount;
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
     protected String title;
-    @XmlElement(namespace = "com/majorczyk/soap/account")
-    protected long balanceAfter;
 
     /**
-     * Gets the value of the source property.
+     * Gets the value of the token property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getSource() {
-        return source;
+    public String getToken() {
+        return token;
     }
 
     /**
-     * Sets the value of the source property.
+     * Sets the value of the token property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setSource(String value) {
-        this.source = value;
+    public void setToken(String value) {
+        this.token = value;
+    }
+
+    /**
+     * Gets the value of the accountNo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    /**
+     * Sets the value of the accountNo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAccountNo(String value) {
+        this.accountNo = value;
     }
 
     /**
@@ -109,22 +133,6 @@ public class AccountHistoryEntity {
      */
     public void setTitle(String value) {
         this.title = value;
-    }
-
-    /**
-     * Gets the value of the balanceAfter property.
-     * 
-     */
-    public long getBalanceAfter() {
-        return balanceAfter;
-    }
-
-    /**
-     * Sets the value of the balanceAfter property.
-     * 
-     */
-    public void setBalanceAfter(long value) {
-        this.balanceAfter = value;
     }
 
 }
