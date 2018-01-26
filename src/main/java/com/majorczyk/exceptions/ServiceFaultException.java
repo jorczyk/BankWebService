@@ -1,7 +1,7 @@
 package com.majorczyk.exceptions;
 
 /**
- *
+ * SOAP error message blueprint
  */
 public class ServiceFaultException extends RuntimeException {
 

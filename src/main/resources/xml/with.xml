@@ -1,0 +1,12 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+<Body>
+  <Withdrawal xmlns="com/majorczyk/soap/account">
+    <operationPayload>
+      <token>user1</token>
+      <accountNo>24001172750000000000000001</accountNo>
+      <amount>123</amount>
+      <title>hihi</title>
+    </operationPayload>
+  </Withdrawal>
+</Body>
+</Envelope>

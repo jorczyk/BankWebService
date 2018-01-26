@@ -6,13 +6,13 @@ import com.majorczyk.model.Operation;
 import com.majorczyk.soap.generated.AccountHistoryEntity;
 
 /**
- * Klasa pomocnicza konwertujaca obiekt modelu do obiektu soap
+ * Util for conversion between xsd generated class and model class
  */
 public class Wrapper {
     /**
-     * Funkcja konwertujaca obiekt modelu operacji bankowej do obiektu SOAP odbieranego przez serwer
-     * @param operation obiekt modelu operacji bankowej
-     * @return obiekt SOAP operacji bankowej
+     * Converts model package class to xsd generated class
+     * @param operation bank operation from model
+     * @return SOAP object
      */
     public static AccountHistoryEntity wrapOperation(Operation operation) {
         AccountHistoryEntity soapOperation = new AccountHistoryEntity();
@@ -23,9 +23,9 @@ public class Wrapper {
         return soapOperation;
     }
     /**
-     * Funkcja konwertujaca obiekt modelu konta bankowego do obiektu SOAP odbieranego przez serwer
-     * @param account obiekt modelu konta bankowego
-     * @return obiekt SOAP konta bankowego
+     * Converts model package class to xsd generated class
+     * @param account bank account from model
+     * @return SOAP object
      */
     public static com.majorczyk.soap.generated.Account wrapAccount(Account account) {
         com.majorczyk.soap.generated.Account soapAccount = new com.majorczyk.soap.generated.Account();

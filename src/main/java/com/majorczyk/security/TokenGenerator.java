@@ -61,6 +61,11 @@ public class TokenGenerator {
         return new String(cipher.doFinal(token.getBytes()));
     }
 
+    /**
+     * Validates token
+     * @param token token to be validated
+     * @return boolean value if token is valid
+     */
     public boolean validateToken(String token) {
         try {
             String login = decrypt(token);
