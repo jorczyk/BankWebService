@@ -22,7 +22,7 @@ public class User {
      * Database unique id
      */
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)//?
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private String id;
 
     /**

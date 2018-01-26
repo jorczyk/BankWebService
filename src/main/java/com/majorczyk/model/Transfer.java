@@ -20,15 +20,7 @@ public class Transfer {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;//?
-
-//    /**
-//     * Transfer type
-//     */
-//    @Setter
-//    @Getter
-//    @Column
-//    private TransferType transferType;//?
+    private String id;
 
     /**
      * Source account number
@@ -37,14 +29,6 @@ public class Transfer {
     @Getter
     @Column
     private String sourceAccountNo;
-
-//    /**
-//     * Destinations account number
-//     */
-//    @Setter
-//    @Getter
-//    @Column
-//    private String destinationAccountNo;//?
 
     /**
      * Amount transferred
@@ -76,25 +60,4 @@ public class Transfer {
         this.title = title;
         this.name = name;
     }
-
-    //    /**
-//     * Balance at source account after transfer
-//     */
-//    @Setter
-//    @Getter
-//    @Column
-//    private int balance;
-
-
-//    public AccountHistoryEntity convertToResponse(){//TODO
-//        AccountHistoryEntity responseHistory = new AccountHistoryEntity();
-//        HistoryTransferSource source = new HistoryTransferSource();
-//        source.setAccountFrom(sourceAccountNo);
-//        responseHistory.setBalanceAfter(balance);
-//        responseHistory.setSource(source);
-//        responseHistory.setDestination(destinationAccountNo);
-////        responseHistory.set(type.getDescription());
-//        return responseHistory;
-//    }
-
 }
