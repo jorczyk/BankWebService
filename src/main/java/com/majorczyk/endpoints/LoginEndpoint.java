@@ -15,7 +15,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 /**
- * Created by Piotr on 2018-01-26.
+ * API endpoint for account logging
  */
 @Endpoint
 public class LoginEndpoint {
@@ -28,18 +28,16 @@ public class LoginEndpoint {
     UserRepository userRepository;
 
     /**
-     *
+     * Log users in
      * @param request
      * @return token
      */
     @PayloadRoot(namespace = NAMESPACE, localPart = "Login")
     @ResponsePayload
     public LoginResponse getToken(@RequestPayload Login request) {
-//        System.out.println("LOGIN!!!");
         LoginResponse response = new LoginResponse();
         User user = userRepository.findByLogin(request.getLogin());
         if (user != null) {
-//            Auth auth = request.getAuth();
             if (user.getLogin().equals(request.getLogin()) && ValidationUtils.validatePassword(user.getPassword(), request.getPassword())) {
                 String token = null;
                 try {

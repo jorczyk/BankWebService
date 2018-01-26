@@ -17,7 +17,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import java.util.List;
 
 /**
- * Created by Piotr on 2018-01-26.
+ * API endpoint for accounts' history
  */
 @Endpoint
 public class HistoryEndpoint {
@@ -30,9 +30,9 @@ public class HistoryEndpoint {
     private final String NAMESPACE = "com/majorczyk/soap/account";
 
     /**
-     *
-     * @param request
-     * @return
+     * Gets account history
+     * @param request - request payload containing account number and token
+     * @return account's history
      */
     @PayloadRoot(namespace = NAMESPACE, localPart = "GetAccountHistoryRequest")
     @ResponsePayload

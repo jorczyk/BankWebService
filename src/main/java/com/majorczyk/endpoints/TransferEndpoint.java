@@ -23,7 +23,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import java.util.List;
 
 /**
- * Created by Piotr on 2018-01-19.
+ * API endpoint for transfers
  */
 @Endpoint
 public class TransferEndpoint {
@@ -41,6 +41,11 @@ public class TransferEndpoint {
     @Autowired
     BankRepository bankRepository;
 
+    /**
+     * Proceeds transfer request
+     * @param request transfer request object
+     * @return
+     */
     @PayloadRoot(namespace = NAMESPACE,
             localPart = "Transfer")
     @ResponsePayload
@@ -83,20 +88,20 @@ public class TransferEndpoint {
                             res.setStatus(-1);
                             String body = restResponse.getBody();
                             System.out.println(body);
-                            res.setMessage("Bank zewnetrzny odrzucil przelew.");
+                            res.setMessage("External transfer refused");
                         }
                     } catch (HttpClientErrorException e) {
                         e.printStackTrace();
                         res.setStatus(-1);
-                        res.setMessage("Blad walidacji danych po stronie odbiorcy.");
+                        res.setMessage("Receiver's data validation error");
                     } catch (IllegalStateException e) {
                         e.printStackTrace();
                         res.setStatus(-1);
-                        res.setMessage("Niepoprawny numer konta odbiorcy.");
+                        res.setMessage("Faulty destination account number");
                     } catch (Exception e) {
                         e.printStackTrace();
                         res.setStatus(-1);
-                        res.setMessage("Blad wewnetrzny po stronie odbiorcy.");
+                        res.setMessage("Receiver's internal error");
                     }
                 }
 
@@ -108,7 +113,7 @@ public class TransferEndpoint {
                     Account dest = accountRepository.findByAccountNumber(request.getAccountTo());
                     if (dest == null) {
                         res.setStatus(-1);
-                        res.setMessage("Konto odbiorcy nie istnieje.");
+                        res.setMessage("Destination account doesn't exist");
                     } else {
                         transferService.saveTransfer(request, account, false);
                         res.setStatus(0);
@@ -124,6 +129,11 @@ public class TransferEndpoint {
         return response;
     }
 
+    /**
+     * Proceeds deposit request
+     * @param request deposit request object
+     * @return
+     */
     @PayloadRoot(namespace = NAMESPACE,
             localPart = "Deposit")
     @ResponsePayload
@@ -161,6 +171,11 @@ public class TransferEndpoint {
         return response;
     }
 
+    /**
+     * Proceeds payment request
+     * @param request payment request object
+     * @return
+     */
     @PayloadRoot(namespace = NAMESPACE,
             localPart = "Payment")
     @ResponsePayload
@@ -186,7 +201,7 @@ public class TransferEndpoint {
             OperationResponse res = new OperationResponse();
             if (account.getBalance() < operationPayload.getAmount()) {
                 res.setStatus(-1);
-                res.setMessage("Niewystarczajace srodki");
+                res.setMessage("Insufficient funds");
             } else {
                 account.setBalance(account.getBalance()-operationPayload.getAmount());
                 Operation operation = new Operation(account.getAccountNumber(), operationPayload.getTitle(),
@@ -202,6 +217,11 @@ public class TransferEndpoint {
         return response;
     }
 
+    /**
+     * Proceeds withdrawal request
+     * @param request withdrawal request object
+     * @return
+     */
     @PayloadRoot(namespace = NAMESPACE,
             localPart = "Withdrawal")
     @ResponsePayload

@@ -32,7 +32,7 @@ public class AccountEndpoint {
 
     /**
      * Gets user's accounts
-     * @param request - request object
+     * @param request - request object containing token
      * @return response with list of user's accounts
      */
     @PayloadRoot(namespace = NAMESPACE,
@@ -40,11 +40,12 @@ public class AccountEndpoint {
     @ResponsePayload
     public GetUserAccountsResponse getUserAccountsRequest(@RequestPayload GetUserAccountsRequest request){
         GetUserAccountsResponse response = new GetUserAccountsResponse();
-        if (!tokenGenerator.validateToken(request.getToken())) {
-            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
-        }
+//        if (!tokenGenerator.validateToken(request.getToken())) {
+//            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
+//        }
         try {
-            String username = tokenGenerator.decrypt(request.getToken());
+//            String username = tokenGenerator.decrypt(request.getToken());
+            String username = request.getToken();
             List<Account> accounts = accountRepository.findByUser(username);
             for (Account account : accounts) {
                 response.getAccount().add(Wrapper.wrapAccount(account));
