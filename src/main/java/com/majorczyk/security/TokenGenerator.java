@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.SecureRandom;
 
 /**
  * Token generator for provided credentials
@@ -27,9 +26,8 @@ public class TokenGenerator {
     {
         try {
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(128); // block size is 128bits
+            keyGenerator.init(128);
             key = keyGenerator.generateKey().getEncoded();
-//            cipher = Cipher.getInstance("AES");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -22,8 +22,6 @@ import com.majorczyk.soap.generated.*;
 @Service
 public class TransferServiceImpl implements TransferService {
 
-    private static final String FILENAME = "Banki.csv";
-
     @Autowired
     private AccountRepository accountRepository;
 
@@ -64,7 +62,6 @@ public class TransferServiceImpl implements TransferService {
             throw new IllegalStateException("Invalid receiver account number");
         }
         String url = bank.getUrl()+"/accounts/"+request.getAccountTo()+"/history";
-//        String url ="http://localhost:8080/accounts/"+request.getDestinationAccount()+"/history";
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         RestTemplate restTemplate = restTemplateBuilder.basicAuthorization("admin", "admin").build();
         JSONObject json = new JSONObject();

@@ -41,8 +41,8 @@ public class HistoryEndpoint {
 //        if (!tokenGenerator.validateToken(request.getToken())) {
 //            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
 //        }
-        List<Operation> operations = operationRepository.findByAccountNo(request.getAccountNo());
-        for (Operation operation : operations) {
+        List<Operation> operationList = operationRepository.findByAccountNo(request.getAccountNo());
+        for (Operation operation : operationList) {
             response.getAccountHistory().add(Wrapper.wrapOperation(operation));
         }
         return response;

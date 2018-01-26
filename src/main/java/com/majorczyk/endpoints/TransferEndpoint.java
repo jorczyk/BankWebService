@@ -60,11 +60,11 @@ public class TransferEndpoint {
         try {
 //            String username = tokenGenerator.decrypt(request.getToken());
             String username = request.getToken();
-            List<Account> accounts = accountRepository.findByUser(username);
+            List<Account> accountList = accountRepository.findByUser(username);
             Account account = null;
-            for (Account acc : accounts) {
-                if (acc.getAccountNumber().equals(request.getAccountFrom())) {
-                    account = acc;
+            for (Account accountTemp : accountList) {
+                if (accountTemp.getAccountNumber().equals(request.getAccountFrom())) {
+                    account = accountTemp;
                     break;
                 }
             }
@@ -72,59 +72,58 @@ public class TransferEndpoint {
                     request.getAccountTo().length() == 0 || request.getAccountFrom().equals(request.getAccountTo())) {
                 throw new ServiceFaultException("ERROR", new ServiceFault("400", "Bad Request"));
             }
-            OperationResponse res = new OperationResponse();
+            OperationResponse responseTemp = new OperationResponse();
             String result = transferService.validateAccount(account, request);
             if (request.isInterbank()) {
                 if (result.length() > 0) {
-                    res.setStatus(-1);
-                    res.setMessage(result);
+                    responseTemp.setStatus(-1);
+                    responseTemp.setMessage(result);
                 } else {
                     try {
                         ResponseEntity<String> restResponse = transferService.sendInterbankTransfer(request, username);
                         if (restResponse.getStatusCode() == HttpStatus.CREATED) {
                             transferService.saveTransfer(request, account, true);
-                            res.setStatus(0);
+                            responseTemp.setStatus(0);
                         } else {
-                            res.setStatus(-1);
+                            responseTemp.setStatus(-1);
                             String body = restResponse.getBody();
                             System.out.println(body);
-                            res.setMessage("External transfer refused");
+                            responseTemp.setMessage("External transfer refused");
                         }
                     } catch (HttpClientErrorException e) {
                         e.printStackTrace();
-                        res.setStatus(-1);
-                        res.setMessage("Receiver's data validation error");
+                        responseTemp.setStatus(-1);
+                        responseTemp.setMessage("Receiver's data validation error");
                     } catch (IllegalStateException e) {
                         e.printStackTrace();
-                        res.setStatus(-1);
-                        res.setMessage("Faulty destination account number");
+                        responseTemp.setStatus(-1);
+                        responseTemp.setMessage("Faulty destination account number");
                     } catch (Exception e) {
                         e.printStackTrace();
-                        res.setStatus(-1);
-                        res.setMessage("Receiver's internal error");
+                        responseTemp.setStatus(-1);
+                        responseTemp.setMessage("Receiver's internal error");
                     }
                 }
 
             } else {
                 if (result.length() > 0) {
-                    res.setStatus(-1);
-                    res.setMessage(result);
+                    responseTemp.setStatus(-1);
+                    responseTemp.setMessage(result);
                 } else {
                     Account dest = accountRepository.findByAccountNumber(request.getAccountTo());
                     if (dest == null) {
-                        res.setStatus(-1);
-                        res.setMessage("Destination account doesn't exist");
+                        responseTemp.setStatus(-1);
+                        responseTemp.setMessage("Destination account doesn't exist");
                     } else {
                         transferService.saveTransfer(request, account, false);
-                        res.setStatus(0);
+                        responseTemp.setStatus(0);
                     }
                 }
 
             }
-            response.setResponse(res);
+            response.setResponse(responseTemp);
         }catch (Exception e){
             throw e;
-//            e.printStackTrace();
         }
         return response;
     }
@@ -146,11 +145,11 @@ public class TransferEndpoint {
         try {
 //            String username = tokenGenerator.decrypt(operationPayload.getToken());
             String username = request.getOperationPayload().getToken();
-            List<Account> accounts = accountRepository.findByUser(username);
+            List<Account> accountList = accountRepository.findByUser(username);
             Account account = null;
-            for (Account acc : accounts) {
-                if (acc.getAccountNumber().equals(operationPayload.getAccountNo())) {
-                    account = acc;
+            for (Account accountTemp : accountList) {
+                if (accountTemp.getAccountNumber().equals(operationPayload.getAccountNo())) {
+                    account = accountTemp;
                     break;
                 }
             }
@@ -162,9 +161,9 @@ public class TransferEndpoint {
                     operationPayload.getAmount(), TransferType.DEPOSIT.getDescription(), account.getBalance());
             operationRepository.save(operation);
             accountRepository.save(account);
-            OperationResponse res = new OperationResponse();
-            res.setStatus(0);
-            response.setResponse(res);
+            OperationResponse responseTemp = new OperationResponse();
+            responseTemp.setStatus(0);
+            response.setResponse(responseTemp);
         }catch (Exception e){
             throw e;
         }
@@ -187,30 +186,30 @@ public class TransferEndpoint {
         }
         try {
             String username = tokenGenerator.decrypt(operationPayload.getToken());
-            List<Account> accounts = accountRepository.findByUser(username);
+            List<Account> accountList = accountRepository.findByUser(username);
             Account account = null;
-            for (Account acc : accounts) {
-                if (acc.getAccountNumber().equals(operationPayload.getAccountNo())) {
-                    account = acc;
+            for (Account accountTemp : accountList) {
+                if (accountTemp.getAccountNumber().equals(operationPayload.getAccountNo())) {
+                    account = accountTemp;
                     break;
                 }
             }
             if (account == null || operationPayload.getAmount() <= 0 || operationPayload.getTitle().length() == 0) {
                 throw new ServiceFaultException("ERROR", new ServiceFault("400", "Bad Request"));
             }
-            OperationResponse res = new OperationResponse();
+            OperationResponse responseTemp = new OperationResponse();
             if (account.getBalance() < operationPayload.getAmount()) {
-                res.setStatus(-1);
-                res.setMessage("Insufficient funds");
+                responseTemp.setStatus(-1);
+                responseTemp.setMessage("Insufficient funds");
             } else {
                 account.setBalance(account.getBalance()-operationPayload.getAmount());
                 Operation operation = new Operation(account.getAccountNumber(), operationPayload.getTitle(),
                         -operationPayload.getAmount(), TransferType.PAYMENT.getDescription(), account.getBalance());
                 operationRepository.save(operation);
                 accountRepository.save(account);
-                res.setStatus(0);
+                responseTemp.setStatus(0);
             }
-            response.setResponse(res);
+            response.setResponse(responseTemp);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -234,30 +233,30 @@ public class TransferEndpoint {
         try {
 //            String username = tokenGenerator.decrypt(operationPayload.getToken());
             String username = request.getOperationPayload().getToken();
-            List<Account> accounts = accountRepository.findByUser(username);
+            List<Account> accountList = accountRepository.findByUser(username);
             Account account = null;
-            for (Account acc : accounts) {
-                if (acc.getAccountNumber().equals(operationPayload.getAccountNo())) {
-                    account = acc;
+            for (Account accountTemp : accountList) {
+                if (accountTemp.getAccountNumber().equals(operationPayload.getAccountNo())) {
+                    account = accountTemp;
                     break;
                 }
             }
             if (account == null || operationPayload.getAmount() <= 0 || operationPayload.getTitle().length() == 0) {
                 throw new ServiceFaultException("ERROR", new ServiceFault("400", "Bad Request"));
             }
-            OperationResponse res = new OperationResponse();
+            OperationResponse responseTemp = new OperationResponse();
             if (account.getBalance() < operationPayload.getAmount()) {
-                res.setStatus(-1);
-                res.setMessage("Insufficient funds");
+                responseTemp.setStatus(-1);
+                responseTemp.setMessage("Insufficient funds");
             } else {
                 account.setBalance(account.getBalance()-operationPayload.getAmount());
                 Operation operation = new Operation(account.getAccountNumber(), operationPayload.getTitle(),
                         -operationPayload.getAmount(), TransferType.WITHDRAWAL.getDescription(), account.getBalance());
                 operationRepository.save(operation);
                 accountRepository.save(account);
-                res.setStatus(0);
+                responseTemp.setStatus(0);
             }
-            response.setResponse(res);
+            response.setResponse(responseTemp);
         }catch (Exception e){
             e.printStackTrace();
         }

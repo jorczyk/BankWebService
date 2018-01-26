@@ -30,8 +30,8 @@ public class ValidationUtils {
         if (accountNo.length() != 26) {
             return false;
         }
-        String tempAcc = accountNo.substring(2);
-        String validationNumber = tempAcc + "2521" + accountNo.substring(0, 2);
+        String temp = accountNo.substring(2);
+        String validationNumber = temp + "2521" + accountNo.substring(0, 2);
         BigInteger result = new BigInteger(validationNumber).remainder(new BigInteger("97"));
         return result.compareTo(new BigInteger("1")) == 0;
     }

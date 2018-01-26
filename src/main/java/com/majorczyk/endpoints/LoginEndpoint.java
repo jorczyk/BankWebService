@@ -47,10 +47,10 @@ public class LoginEndpoint {
                 }
                 response.setToken(token);
             } else {
-                throw new ServiceFaultException("ERROR", new ServiceFault("400", "Niepoprawny dane logowania"));
+                throw new ServiceFaultException("ERROR", new ServiceFault("400", "Invalid credentials"));
             }
         } else {
-            throw new ServiceFaultException("ERROR", new ServiceFault("404", "Uzytkownik nie istnieje"));
+            throw new ServiceFaultException("ERROR", new ServiceFault("404", "User does not exist"));
         }
 
         return response;
