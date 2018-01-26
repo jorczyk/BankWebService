@@ -46,11 +46,15 @@ public class TransferEndpoint {
     @ResponsePayload
     public TransferResponse transfer(@RequestPayload Transfer request) {
         TransferResponse response = new TransferResponse();
-        if (!tokenGenerator.validateToken(request.getToken())) {
-            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
-        }
+//        if (!tokenGenerator.validateToken(request.getToken())) {
+//            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
+//        }
+//        if (request.getAmount() <= 0){
+//            throw new ServiceFaultException("ERROR", new ServiceFault("500", "Amount cannot be lower than 0"));
+//        }
         try {
-            String username = tokenGenerator.decrypt(request.getToken());
+//            String username = tokenGenerator.decrypt(request.getToken());
+            String username = request.getToken();
             List<Account> accounts = accountRepository.findByUser(username);
             Account account = null;
             for (Account acc : accounts) {
@@ -114,7 +118,8 @@ public class TransferEndpoint {
             }
             response.setResponse(res);
         }catch (Exception e){
-            e.printStackTrace();
+            throw e;
+//            e.printStackTrace();
         }
         return response;
     }
@@ -125,11 +130,12 @@ public class TransferEndpoint {
     public DepositResponse deposit(@RequestPayload Deposit request) {
         DepositResponse response = new DepositResponse();
         OperationPayload operationPayload = request.getOperationPayload();
-        if (!tokenGenerator.validateToken(operationPayload.getToken())) {
-            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
-        }
+//        if (!tokenGenerator.validateToken(operationPayload.getToken())) {
+//            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
+//        }
         try {
-            String username = tokenGenerator.decrypt(operationPayload.getToken());
+//            String username = tokenGenerator.decrypt(operationPayload.getToken());
+            String username = request.getOperationPayload().getToken();
             List<Account> accounts = accountRepository.findByUser(username);
             Account account = null;
             for (Account acc : accounts) {
@@ -150,7 +156,7 @@ public class TransferEndpoint {
             res.setStatus(0);
             response.setResponse(res);
         }catch (Exception e){
-            e.printStackTrace();
+            throw e;
         }
         return response;
     }
@@ -202,11 +208,12 @@ public class TransferEndpoint {
     public WithdrawalResponse withdrawal(@RequestPayload Withdrawal request) {
         WithdrawalResponse response = new WithdrawalResponse();
         OperationPayload operationPayload = request.getOperationPayload();
-        if (!tokenGenerator.validateToken(operationPayload.getToken())) {
-            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
-        }
+//        if (!tokenGenerator.validateToken(operationPayload.getToken())) {
+//            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
+//        }
         try {
-            String username = tokenGenerator.decrypt(operationPayload.getToken());
+//            String username = tokenGenerator.decrypt(operationPayload.getToken());
+            String username = request.getOperationPayload().getToken();
             List<Account> accounts = accountRepository.findByUser(username);
             Account account = null;
             for (Account acc : accounts) {
@@ -221,7 +228,7 @@ public class TransferEndpoint {
             OperationResponse res = new OperationResponse();
             if (account.getBalance() < operationPayload.getAmount()) {
                 res.setStatus(-1);
-                res.setMessage("Niewystarczajace srodki");
+                res.setMessage("Insufficient funds");
             } else {
                 account.setBalance(account.getBalance()-operationPayload.getAmount());
                 Operation operation = new Operation(account.getAccountNumber(), operationPayload.getTitle(),

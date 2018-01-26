@@ -1,4 +1,8 @@
-<acc:Login xmlns:acc="com/majorczyk/soap/account">
-  <acc:login>string</acc:login>
-  <acc:password>string</acc:password>
-</acc:Login>
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+  <Body>
+    <Login xmlns="com/majorczyk/soap/account">
+      <login>user1</login>
+      <password>user1</password>
+    </Login>
+  </Body>
+</Envelope>

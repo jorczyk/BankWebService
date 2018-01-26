@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="accountFrom" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="accountTo" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -51,7 +51,7 @@ public class Transfer {
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
     protected String accountTo;
     @XmlElement(namespace = "com/majorczyk/soap/account")
-    protected int amount;
+    protected long amount;
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
     protected String title;
     @XmlElement(namespace = "com/majorczyk/soap/account", required = true)
@@ -113,7 +113,7 @@ public class Transfer {
      * Gets the value of the amount property.
      * 
      */
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 
@@ -121,7 +121,7 @@ public class Transfer {
      * Sets the value of the amount property.
      * 
      */
-    public void setAmount(int value) {
+    public void setAmount(long value) {
         this.amount = value;
     }
 

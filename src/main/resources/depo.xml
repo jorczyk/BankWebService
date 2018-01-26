@@ -1,0 +1,8 @@
+<acc:Deposit xmlns:acc="com/majorczyk/soap/account">
+  <acc:operationPayload>
+    <acc:token>string</acc:token>
+    <acc:accountNo>string</acc:accountNo>
+    <acc:amount>10</acc:amount>
+    <acc:title>string</acc:title>
+  </acc:operationPayload>
+</acc:Deposit>

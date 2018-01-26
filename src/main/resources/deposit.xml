@@ -1,0 +1,15 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+    <Body>
+        <Deposit xmlns="com/majorczyk/soap/account">
+            <operationPayload>
+                <token>abd</token>
+                <accountNo>24001172750000000000000001</accountNo>
+                <amount>15354</amount>
+                <title>hello</title>
+            </operationPayload>
+        </Deposit>
+    </Body>
+</Envelope>
+
+2354
+

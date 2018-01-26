@@ -1,0 +1,9 @@
+<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+  <Body>
+    <GetAccountHistoryRequest xmlns="com/majorczyk/soap/account">
+      <token>user1</token>
+      <accountNo>24001172750000000000000001</accountNo>
+    </GetAccountHistoryRequest>
+  </Body>
+</Envelope>
+

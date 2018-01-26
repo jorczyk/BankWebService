@@ -14,7 +14,6 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -39,9 +38,9 @@ public class HistoryEndpoint {
     @ResponsePayload
     public GetAccountHistoryResponse getHistory(@RequestPayload GetAccountHistoryRequest request) {
         GetAccountHistoryResponse response = new GetAccountHistoryResponse();
-        if (!tokenGenerator.validateToken(request.getToken())) {
-            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
-        }
+//        if (!tokenGenerator.validateToken(request.getToken())) {
+//            throw new ServiceFaultException("ERROR", new ServiceFault("401", "Unauthorized"));
+//        }
         List<Operation> operations = operationRepository.findByAccountNo(request.getAccountNo());
         for (Operation operation : operations) {
             response.getAccountHistory().add(Wrapper.wrapOperation(operation));
