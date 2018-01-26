@@ -28,13 +28,14 @@ public class LoginEndpoint {
     UserRepository userRepository;
 
     /**
-     * Funkcja obslugujaca logowanie
-     * @param request obiekt zadania zawierajacy login oraz haslo uzytkownika
-     * @return token wygenerowany przez serwer uzywany w dalszej uwierzytelnionej komunikacji
+     *
+     * @param request
+     * @return token
      */
     @PayloadRoot(namespace = NAMESPACE, localPart = "Login")
     @ResponsePayload
     public LoginResponse getToken(@RequestPayload Login request) {
+//        System.out.println("LOGIN!!!");
         LoginResponse response = new LoginResponse();
         User user = userRepository.findByLogin(request.getLogin());
         if (user != null) {

@@ -54,13 +54,13 @@ public class ValidationUtils {
     public static String getErrorMessage(String field){
         switch (field) {
             case "source_account":
-                return "January";
+                return "Niepoprawny numer rachunku bankowego.";
             case "title":
-                return "January";
+                return "Tytul przelewu pusty lub zbyt dlugi.";
             case "name":
-                return "January";
+                return "Nadawca przelewu pusty lub zbyt dlugi.";
             case "amount":
-                return "January";
+                return "Niepoprawna kwota przelewu.";
             default:
                 return "";
         }

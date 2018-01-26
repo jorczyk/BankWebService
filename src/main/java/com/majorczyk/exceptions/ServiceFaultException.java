@@ -1,7 +1,7 @@
 package com.majorczyk.exceptions;
 
 /**
- * Klasa bedaca szkieletem dla bledu generowanego przez SOAP
+ *
  */
 public class ServiceFaultException extends RuntimeException {
 

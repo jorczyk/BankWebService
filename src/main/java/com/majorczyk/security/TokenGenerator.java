@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 
@@ -24,10 +25,14 @@ public class TokenGenerator {
 
     public TokenGenerator()
     {
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[20];
-        random.nextBytes(bytes);
-        key = bytes;
+        try {
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+            keyGenerator.init(128); // block size is 128bits
+            key = keyGenerator.generateKey().getEncoded();
+//            cipher = Cipher.getInstance("AES");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

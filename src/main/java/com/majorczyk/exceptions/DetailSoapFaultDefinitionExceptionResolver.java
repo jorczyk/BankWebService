@@ -6,7 +6,7 @@ import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionReso
 import javax.xml.namespace.QName;
 
 /**
- * Klasa odpowiedzialna za stworzenie dokladnego bledu SOAP (details)
+ *
  */
 public class DetailSoapFaultDefinitionExceptionResolver extends SoapFaultMappingExceptionResolver {
 

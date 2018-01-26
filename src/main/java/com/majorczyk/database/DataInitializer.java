@@ -14,9 +14,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/**
- * Created by Piotr on 2018-01-19.
- */
+
 @Component
 public class DataInitializer implements ApplicationRunner {
 
@@ -69,6 +67,7 @@ public class DataInitializer implements ApplicationRunner {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("DONE initializing database");
 
     }
 }

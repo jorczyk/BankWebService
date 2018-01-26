@@ -14,6 +14,7 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -31,8 +32,8 @@ public class HistoryEndpoint {
 
     /**
      *
-     * @param request obiekt zadania zawierajacy inromacje o koncie bankowym
-     * @return Lista operacji powiazanych z kontem bankowym
+     * @param request
+     * @return
      */
     @PayloadRoot(namespace = NAMESPACE, localPart = "GetAccountHistoryRequest")
     @ResponsePayload
