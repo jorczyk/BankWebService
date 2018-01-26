@@ -1,16 +1,16 @@
 package com.majorczyk.rest;
 
-        import com.majorczyk.database.AccountRepository;
-        import com.majorczyk.database.OperationRepository;
-        import com.majorczyk.model.Account;
-        import com.majorczyk.model.Operation;
-        import com.majorczyk.model.Transfer;
-        import com.majorczyk.security.ValidationUtils;
-        import org.json.JSONObject;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.HttpStatus;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.web.bind.annotation.*;
+import com.majorczyk.database.AccountRepository;
+import com.majorczyk.database.OperationRepository;
+import com.majorczyk.model.Account;
+import com.majorczyk.model.Operation;
+import com.majorczyk.model.Transfer;
+import com.majorczyk.security.ValidationUtils;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * REST inter-bank transfers controller
@@ -18,12 +18,6 @@ package com.majorczyk.rest;
 
 @RestController
 public class ExternalTransferController {
-
-//    @Autowired
-//    AccountService accountService;
-//
-//    @Autowired
-//    TransferService transferService;
 
     @Autowired
     AccountRepository accountRepository;
@@ -59,6 +53,11 @@ public class ExternalTransferController {
         }
     }
 
+    /**
+     * Finds account by account number
+     * @param accountNumber
+     * @return
+     */
     private Account accountExists(String accountNumber) {
         return accountRepository.findByAccountNumber(accountNumber);
     }
