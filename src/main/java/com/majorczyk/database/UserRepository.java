@@ -1,8 +1,6 @@
 package com.majorczyk.database;
 
-import com.majorczyk.model.Account;
 import com.majorczyk.model.User;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
